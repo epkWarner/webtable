@@ -1,0 +1,5 @@
+this component accesses subcomponents from the MainMenu component
+accesses:
+MenuSection
+    accesses:
+        MenuItem
