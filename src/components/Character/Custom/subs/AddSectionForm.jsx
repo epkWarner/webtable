@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Typography, Button, TextField, FormGroup } from '@material-ui/core';
+import { Button, TextField, FormGroup } from '@material-ui/core';
 
 function AddSectionForm(props) {
 

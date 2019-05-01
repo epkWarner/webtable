@@ -47,4 +47,39 @@ const Words = {
     }
 }
 
-export default [Picker, Words]
+const Numbers = {
+    type: 'text',
+    meta: {
+        autoComplete: '',
+        autoFocus: false,
+        disabled: false,
+        error: false,
+        FormHelperTextProps: {},
+        fullWidth: true,
+        helperText: '',
+        id: '',
+        InputLabelProps: {},
+        InputProps: {
+            inputProps: {
+                min: '0',
+            }
+        },
+        label: '',
+        margin: 'none',
+        multiline: false,
+        name: '',
+        placeholder: '',
+        readOnly: false,
+        required: false,
+        rows: 1,
+        rowsMax: 1,
+        select: false,
+        SelectProps: {},
+        inputType: 'number',
+        type: 'number',
+        value: '',
+        variant: 'outlined'
+    }
+}
+
+export default [Picker, Words, Numbers]

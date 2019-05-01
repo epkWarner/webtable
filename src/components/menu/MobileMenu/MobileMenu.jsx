@@ -5,6 +5,7 @@ import MenuSection from '../MainMenu/subs/MenuSection';
 import { Auth } from '../../../context/Auth';
 import Add from '@material-ui/icons/Add'
 import Close from '@material-ui/icons/Close'
+
 const styles = {
     closed: {
         position: 'fixed',

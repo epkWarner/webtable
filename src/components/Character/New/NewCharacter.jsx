@@ -8,11 +8,11 @@ export default function NewCharacter(props) {
 
     const [loading, setLoading] = useState(true)
     const [formState, setFormState] = useState({})
-    let Template = Object.keys(props.template.sections).length > 0 ? props.template : Template1
+    let Template = props.template ? Object.keys(props.template.sections).length > 0 ? props.template : Template1 : Template1
 
     useEffect(() => {
         document.title = 'New Character'
-
+        setFormState({})
         let sections = {}
 
         Object.keys(Template.sections).map(section => {
@@ -30,7 +30,14 @@ export default function NewCharacter(props) {
             document.title = ''
         };
 
-    }, [])
+    }, [Template])
+
+    useEffect(() => {
+        // console.log('NewCharacter useEffect', formState)
+        return () => {
+
+        };
+    }, [formState])
 
     const handleChange = (e) => {
         let [section, name] = e.target.name.split('#')

@@ -20,24 +20,28 @@ function CustomTemplate(props) {
     const [activeSection, setActiveSection] = useState('')
 
     useEffect(() => {
-        console.log(template)
+        // console.log('customtemplate useeffect', template)
         return () => {
         };
     }, [template])
 
     function buildTemplate(state, action) {
+        let newSections = state.sections
+        let newSection = state.sections[action.section]
+        let newFields
         switch (action.type) {
             case 'addsection':
-                let sections = state.sections
-                sections = { ...sections, [action.section.name]: { fields: {} } };
-                return { ...state, sections }
+                newSections = { ...newSections, [action.section.name]: { fields: {} } };
+                return { ...state, sections: newSections }
             case 'killsection':
 
                 break;
             case 'addfield':
-                let fields = state.sections[action.section].fields
-                fields = { ...fields, [action.field.name]: action.field.template }
-                return { ...state, ...state.sections[action.section], fields }
+                newFields = state.sections[action.section].fields !== undefined ? state.sections[action.section].fields : {}
+                newFields = { ...newFields, [action.field.name]: action.field.template }
+                newSection = { ...newSection, fields: newFields }
+                newSections = { ...newSections, [action.section]: newSection }
+                return { ...state, sections: newSections }
             case 'killfield':
 
                 break;
@@ -62,7 +66,7 @@ function CustomTemplate(props) {
                 <Button variant='contained' color='primary' name='field' onClick={handleClick}><ControlPoint /> Add Field</Button>
             </Grid>
             <Grid item xs={12}>
-                {showForm === 'field' ? <AddFieldForm dispatch={dispatch} section={activeSection} setSection={setActiveSection} /> : showForm === 'section' ? <AddSectionForm dispatch={dispatch} section={activeSection} setSection={setActiveSection} /> : <></>}
+                {showForm === 'field' ? <AddFieldForm dispatch={dispatch} section={activeSection} setSection={setActiveSection} sections={Object.keys(template.sections)} /> : showForm === 'section' ? <AddSectionForm dispatch={dispatch} section={activeSection} setSection={setActiveSection} /> : <></>}
             </Grid>
             <Grid item xs={12}>
                 <Paper style={styles.paper}>
