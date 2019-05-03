@@ -14,8 +14,16 @@ const styles = {
 export default function MenuItem(props) {
   let link = props.item.link
   return (
-    <NavLink style={styles.a} to={link} onClick={props.toggleMenu || null}>
-      <ListItem dense button divider>
+    <NavLink 
+    style={styles.a} 
+    to={link} 
+    onClick={props.toggleMenu || null}
+    >
+      <ListItem 
+      dense 
+      button 
+      divider
+      >
         <ListItemText primaryTypographyProps={{ variant: 'h6', align: 'center' }}>
           {props.name}
         </ListItemText>

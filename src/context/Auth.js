@@ -12,6 +12,7 @@ function AuthProvider(props) {
     const logout = () => {
         setAuth(false)
     }
+
     return (
         <Auth.Provider
             value={
@@ -30,5 +31,3 @@ function AuthProvider(props) {
 const AuthConsumer = Auth.Consumer
 
 export { AuthProvider, AuthConsumer, Auth }
-
-

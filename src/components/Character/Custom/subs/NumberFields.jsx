@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import InputField from '../../../Shared/InputField';
 import { Grid, FormControlLabel, Switch } from '@material-ui/core';
+import GridItem from '../../../Shared/GridItem';
 
 function NumberFields(props) {
     const [state, setState] = useState({
@@ -14,15 +15,16 @@ function NumberFields(props) {
 
     function handleChange(e) {
         let [section, name] = e.currentTarget.name.split('#')
-        // console.log('NumberFields handleChange', e.currentTarget)
+
         setState({ ...state, [name]: e.currentTarget.value })
+
         props.change(name, e.currentTarget.value)
         name === 'required' ? setSwitchValue(!switchValue) : setSwitchValue(switchValue)
     }
 
     return (
         <Grid container spacing={8}>
-            <Grid item xs={12} sm={6} md={4} lg={3}>
+            <GridItem>
                 <InputField
                     change={handleChange}
                     state={state.name}
@@ -34,8 +36,8 @@ function NumberFields(props) {
                         }
                     }}
                 />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={3}>
+            </GridItem>
+            <GridItem>
                 <InputField
                     change={handleChange}
                     name='min'
@@ -53,8 +55,8 @@ function NumberFields(props) {
                         }
                     }}
                 />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={3}>
+            </GridItem>
+            <GridItem>
                 <InputField
                     change={handleChange}
                     name='max'
@@ -72,14 +74,21 @@ function NumberFields(props) {
                         }
                     }}
                 />
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={3}>
+            </GridItem>
+            <GridItem>
                 <FormControlLabel
                     label='Required'
                     labelPlacement='start'
-                    control={<Switch color="primary" name={`${section}#required`} onChange={handleChange} value={switchValue} />}
+                    control={
+                        <Switch
+                            color="primary"
+                            name={`${section}#required`}
+                            onChange={handleChange}
+                            value={switchValue}
+                        />
+                    }
                 />
-            </Grid>
+            </GridItem>
         </Grid>
     )
 }

@@ -30,7 +30,6 @@ const InputField = React.memo(function NCTextField(props) {
       type={meta.inputType || 'text'}
       value={props.state || ''}
       variant='outlined'
-
     />
   )
 }

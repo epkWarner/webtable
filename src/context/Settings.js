@@ -9,7 +9,7 @@ function SettingsProvider(props) {
 
             }
         >
-
+            {props.children}
         </SettingsContext.Provider>
     )
 }

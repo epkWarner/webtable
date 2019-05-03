@@ -22,7 +22,11 @@ const SelectField = React.memo(function NCSelectField(props) {
                 value={props.state || ''}
                 variant='outlined'
             >
-                {props.options.map(option => <MenuItem key={option.value} value={option.value} >{option.text}</MenuItem>)}
+                {props.options.map(
+                    option => <MenuItem key={option.value} value={option.value} >
+                            {option.text}
+                        </MenuItem>
+                    )}
             </Select>
             <FormHelperText>{meta.helperText || ''}</FormHelperText>
         </FormControl>

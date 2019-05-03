@@ -8,18 +8,31 @@ export default function NewCharacter(props) {
 
     const [loading, setLoading] = useState(true)
     const [formState, setFormState] = useState({})
-    let Template = props.template ? Object.keys(props.template.sections).length > 0 ? props.template : Template1 : Template1
+    let Template = props.template ? 
+                    Object.keys(props.template.sections).length > 0 ?
+                        props.template 
+                            : Template1 
+                                : Template1
 
     useEffect(() => {
         document.title = 'New Character'
         setFormState({})
+        
         let sections = {}
-
-        Object.keys(Template.sections).map(section => {
-            let fields = {}
-            Object.keys(Template.sections[section].fields).map(field => {
-                return fields = { ...fields, [Template.sections[section].fields[field].meta.label]: Template.sections[section].fields[field].defaultValue || null }
-            })
+        Object.keys(Template.sections).map(
+            section => {
+                let fields = {}
+                Object.keys(Template.sections[section].fields).map(
+                    field => {
+                        return (
+                            fields = {
+                                 ...fields,
+                                  [Template.sections[section].fields[field].meta.label]: Template.sections[section].fields[field].defaultValue 
+                                  || null
+                        }
+                        )
+            }
+            )
             return sections = { ...sections, [section]: fields }
         })
 
@@ -31,13 +44,6 @@ export default function NewCharacter(props) {
         };
 
     }, [Template])
-
-    useEffect(() => {
-        // console.log('NewCharacter useEffect', formState)
-        return () => {
-
-        };
-    }, [formState])
 
     const handleChange = (e) => {
         let [section, name] = e.target.name.split('#')
@@ -60,7 +66,8 @@ export default function NewCharacter(props) {
                         <form autoComplete="off">
                             <Grid container spacing={16}>
                                 {
-                                    Object.keys(Template.sections).map(section => {
+                                    Object.keys(Template.sections).map(
+                                        section => {
                                         return (
                                             <Grid item xs={12} key={section}>
                                                 <NCSection
@@ -71,7 +78,8 @@ export default function NewCharacter(props) {
                                                 />
                                             </Grid>
                                         )
-                                    })
+                                    }
+                                    )
                                 }
                             </Grid>
                         </form>

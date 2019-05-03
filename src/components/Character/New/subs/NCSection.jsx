@@ -1,7 +1,8 @@
 import React from 'react'
-import { FormControl, Typography, Grid, withStyles, Divider } from '@material-ui/core';
+import { Typography, Grid, withStyles, Divider } from '@material-ui/core';
 import SelectField from '../../../Shared/SelectField';
 import InputField from '../../../Shared/InputField';
+import GridItem from '../../../Shared/GridItem';
 
 const styles = theme => ({
     root: {
@@ -12,12 +13,9 @@ const styles = theme => ({
 function NCSection(props) {
 
     function renderFields(field) {
-        let res
         switch (field.type) {
             case 'select':
-                // console.log('renderFields', props.title, field.meta.label)
-                res =
-                    <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={field.meta.label}>
+                return <GridItem key={field.meta.label}>
                         <SelectField
                             id={field.meta.label}
                             meta={field.meta}
@@ -28,28 +26,21 @@ function NCSection(props) {
                             fullWidth={true}
                             section={props.title}
                         />
-                    </Grid>
-
-                break;
+                    </GridItem>
             case 'text':
-                // console.log('renderFiels', props.title, field.meta.label)
-                res = (
-                    <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={field.meta.label}>
-                        <FormControl >
-                            <InputField
-                                change={props.change}
-                                state={props.state[props.title][field.meta.label]}
-                                name={field.meta.label}
-                                field={field}
-                                section={props.title}
-                            />
-                        </FormControl>
-                    </Grid>
+                return (
+                    <GridItem key={field.meta.label}>
+                        <InputField
+                            change={props.change}
+                            state={props.state[props.title][field.meta.label]}
+                            name={field.meta.label}
+                            field={field}
+                            section={props.title}
+                        />
+                    </GridItem>
                 )
-                break;
             default:
         }
-        return res
     }
 
     return (

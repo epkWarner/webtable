@@ -5,11 +5,13 @@ import ControlPoint from '@material-ui/icons/ControlPoint'
 import AddFieldForm from './subs/AddFieldForm';
 import AddSectionForm from './subs/AddSectionForm';
 import NewCharacter from '../New/NewCharacter';
+import GridItem from '../../Shared/GridItem';
 
 const styles = {
     paper: {
         height: '50vh',
-        overflow: 'auto'
+        overflow: 'auto',
+        padding: '10px',
     }
 }
 
@@ -59,14 +61,43 @@ function CustomTemplate(props) {
             <Grid item xs={12}>
                 <h1>Custom Template</h1>
             </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={3}>
-                <Button variant='contained' color='primary' name='section' onClick={handleClick}><ControlPoint />Add Section</Button>
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={3}>
-                <Button variant='contained' color='primary' name='field' onClick={handleClick}><ControlPoint /> Add Field</Button>
-            </Grid>
+            <GridItem>
+                <Button
+                    variant='contained'
+                    color='primary'
+                    name='section'
+                    onClick={handleClick}
+                >
+                    <ControlPoint />Add Section
+                </Button>
+            </GridItem>
+            <GridItem>
+                <Button
+                    variant='contained'
+                    color='primary'
+                    name='field'
+                    onClick={handleClick}
+                >
+                    <ControlPoint /> Add Field
+                </Button>
+            </GridItem>
             <Grid item xs={12}>
-                {showForm === 'field' ? <AddFieldForm dispatch={dispatch} section={activeSection} setSection={setActiveSection} sections={Object.keys(template.sections)} /> : showForm === 'section' ? <AddSectionForm dispatch={dispatch} section={activeSection} setSection={setActiveSection} /> : <></>}
+                {
+                    showForm === 'field' ?
+                        <AddFieldForm
+                            dispatch={dispatch}
+                            section={activeSection}
+                            setSection={setActiveSection}
+                            sections={Object.keys(template.sections)}
+                        />
+                        : showForm === 'section' ?
+                            <AddSectionForm
+                                dispatch={dispatch}
+                                section={activeSection}
+                                setSection={setActiveSection}
+                            />
+                            : <></>
+                }
             </Grid>
             <Grid item xs={12}>
                 <Paper style={styles.paper}>

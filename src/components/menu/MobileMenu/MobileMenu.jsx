@@ -30,23 +30,31 @@ function MobileMenu(props) {
     const [expanded, setExpanded] = useState('')
     const auth = useContext(Auth)
 
-    const toggleDrawer = () => {
+    function toggleDrawer () {
         setOpen(!open)
     }
 
     function toggler(name) {
-        expanded === name ? setExpanded('') : setExpanded(name)
+        expanded === name ? 
+        setExpanded('') 
+        : setExpanded(name)
     }
 
     return (
         <>
             <Fab
-                style={open ? styles.open : styles.closed}
+                style={
+                    open ? 
+                    styles.open 
+                    : styles.closed
+                }
                 onClick={toggleDrawer}
             >
-                {!open ?
-                    <Add /> :
-                    <Close />}
+                {
+                    !open ?
+                    <Add /> 
+                    : <Close />
+                }
             </Fab>
             <SwipeableDrawer
                 anchor='right'
@@ -55,7 +63,8 @@ function MobileMenu(props) {
                 onOpen={toggleDrawer}
             >
                 {
-                    Object.keys(menuItems).map(key =>
+                    Object.keys(menuItems).map(
+                        key =>
                         !menuItems[key].protected ?
                             <MenuSection
                                 items={menuItems[key].collapse}
@@ -64,16 +73,16 @@ function MobileMenu(props) {
                                 toggle={toggler}
                                 expanded={expanded}
                                 toggleMenu={toggleDrawer}
-                            /> :
-                            auth.authState ?
+                            /> 
+                            : auth.authState ?
                                 <MenuSection
                                     key={key}
                                     items={menuItems[key].collapse}
                                     name={key} toggle={toggler}
                                     expanded={expanded}
                                     toggleMenu={toggleDrawer}
-                                /> :
-                                <></>
+                                /> 
+                                : <></>
                     )
                 }
             </SwipeableDrawer>
@@ -82,4 +91,3 @@ function MobileMenu(props) {
 }
 
 export default MobileMenu
-

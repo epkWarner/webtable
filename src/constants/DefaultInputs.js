@@ -29,7 +29,9 @@ const Words = {
         helperText: '',
         id: '',
         InputLabelProps: {},
-        InputProps: {},
+        InputProps: {
+            fullWidth: true
+        },
         label: '',
         margin: 'none',
         multiline: false,
@@ -60,6 +62,7 @@ const Numbers = {
         id: '',
         InputLabelProps: {},
         InputProps: {
+            fullWidth: true,
             inputProps: {
                 min: '0',
             }
@@ -82,4 +85,4 @@ const Numbers = {
     }
 }
 
-export default [Picker, Words, Numbers]
+export {Picker, Words, Numbers}

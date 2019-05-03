@@ -38,8 +38,14 @@ function App(props) {
   const { classes } = props;
 
   useEffect(() => {
-    typeof window.orientation !== "undefined" || navigator.userAgent.indexOf('IEMobile') !== -1 || smallScreen ? setMobile(true) : setMobile(false)
+    typeof window.orientation !== "undefined" 
+    || navigator.userAgent.indexOf('IEMobile') !== -1 
+    || smallScreen ? 
+    setMobile(true) 
+    : setMobile(false)
+    
     document.title = 'WebTable'
+    
     return () => {
     };
   }, [])
@@ -48,7 +54,11 @@ function App(props) {
     <div className={classes.root}>
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
-          <Typography variant="h6" color="inherit" noWrap>
+          <Typography 
+          variant="h6" 
+          color="inherit" 
+          noWrap
+          >
             WebTable
           </Typography>
         </Toolbar>

@@ -11,22 +11,25 @@ function MainMenu() {
     const miKeys = Object.keys(menuItems)
 
     function toggler(name) {
-        expanded === name ? setExpanded('') : setExpanded(name)
+        expanded === name ? 
+        setExpanded('') 
+        : setExpanded(name)
     }
 
     return (
         <ClickAwayListener onClickAway={toggler}>
             <List component='nav'>
                 {
-                    miKeys.map(key => !menuItems[key].protected ?
+                    miKeys.map(
+                        key => !menuItems[key].protected ?
                         <MenuSection
                             items={menuItems[key].collapse}
                             key={key}
                             name={key}
                             toggle={toggler}
                             expanded={expanded}
-                        /> :
-                        auth.authState ?
+                        /> 
+                        : auth.authState ?
                             <MenuSection
                                 key={key}
                                 items={menuItems[key].collapse}
@@ -39,7 +42,6 @@ function MainMenu() {
                 }
             </List>
         </ClickAwayListener>
-
     )
 }
 

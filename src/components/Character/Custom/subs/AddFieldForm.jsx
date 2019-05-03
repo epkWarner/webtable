@@ -1,8 +1,21 @@
 import React, { useState, useEffect } from 'react'
-import { FormGroup, Collapse, List, ListItem, ListItemText, Select, MenuItem, Grid, Input, Tooltip, Button, Typography } from '@material-ui/core';
+import {
+    FormGroup,
+    Collapse,
+    List,
+    ListItem,
+    ListItemText,
+    Select,
+    MenuItem,
+    Grid,
+    Input,
+    Tooltip,
+    Button,
+    Typography
+} from '@material-ui/core';
 import { ExpandLess, ExpandMore } from '@material-ui/icons'
 import Options from '../../../../constants/options';
-import DefaultInputs from '../../../../constants/DefaultInputs';
+import { Picker, Numbers } from '../../../../constants/DefaultInputs';
 import NumberFields from './NumberFields';
 
 function AddFieldForm(props) {
@@ -10,7 +23,6 @@ function AddFieldForm(props) {
     const [selected, setSelected] = useState('')
     const [field, setField] = useState({})
     const [section, setSection] = useState(props.section)
-    let [Picker, Words, Numbers] = DefaultInputs
 
     useEffect(() => {
         // console.log('addfieldform useeffect', field)
@@ -49,13 +61,15 @@ function AddFieldForm(props) {
                 break;
             case 'min':
                 newProps = { ...newProps, min: value }
-                meta.InputProps.inputProps = newProps
-                setField({ ...field, meta: meta })
+                newMeta = meta
+                newMeta.InputProps.inputProps = newProps
+                setField({ ...field, meta: newMeta })
                 break;
             case 'max':
                 newProps = { ...newProps, max: value }
-                meta.InputProps.inputProps = newProps
-                setField({ ...field, meta: meta })
+                newMeta = meta
+                newMeta.InputProps.inputProps = newProps
+                setField({ ...field, meta: newMeta })
                 break;
             case 'required':
                 value = value === 'true' ? true : false
@@ -74,9 +88,15 @@ function AddFieldForm(props) {
     function formSwitch() {
         switch (selected) {
             case 'Number':
-                return <NumberFields change={editField} section={props.section} />
+                return <NumberFields
+                    change={editField}
+                    section={props.section}
+                    sections={props.sections}
+                />
             default:
-                return <Typography>Select a field type to see detailed options</Typography>;
+                return <Typography>
+                    Select a field type to see detailed options
+                    </Typography>;
         }
     }
 
@@ -118,7 +138,9 @@ function AddFieldForm(props) {
                                                     </Select>
                                                 </Grid>
                                                 <Grid item xs={2}>
-                                                    {open ? <ExpandLess onClick={toggleOpen} /> : <ExpandMore onClick={toggleOpen} />}
+                                                    {open ?
+                                                        <ExpandLess onClick={toggleOpen} />
+                                                        : <ExpandMore onClick={toggleOpen} />}
                                                 </Grid>
                                                 <Grid item xs={12}>
                                                     <Collapse in={open}>

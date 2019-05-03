@@ -5,6 +5,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { AuthProvider } from './context/Auth'
 import { BrowserRouter as Router } from 'react-router-dom'
+
 ReactDOM.render(
     <AuthProvider>
         <Router>

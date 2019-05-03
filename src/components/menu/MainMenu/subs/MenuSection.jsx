@@ -1,5 +1,10 @@
 import React from 'react'
-import { Typography, List, ListItem, Collapse } from '@material-ui/core';
+import { 
+    Typography, 
+    List, 
+    ListItem, 
+    Collapse 
+} from '@material-ui/core';
 import MenuItem from './MenuItem'
 
 function MenuSection(props) {
@@ -7,7 +12,8 @@ function MenuSection(props) {
     let items = props.items
 
     function renderItems() {
-        return itemKeys.map(key => items[key].type.protected ?
+        return itemKeys.map(
+            key => items[key].type.protected ?
             <MenuItem
                 key={key}
                 item={items[key]}
@@ -15,8 +21,7 @@ function MenuSection(props) {
                 toggleMenu={props.toggleMenu || null}
                 style={{ width: '100%' }}
             />
-            :
-            <MenuItem
+            : <MenuItem
                 key={key}
                 item={items[key]}
                 name={key}
@@ -27,18 +32,23 @@ function MenuSection(props) {
 
     return (
         <>
-            <ListItem button onClick={() => props.toggle(props.name)} name={props.name} divider>
-                <Typography align='center' color='primary' inline>
+            <ListItem 
+            button 
+            onClick={() => props.toggle(props.name)} 
+            name={props.name} 
+            divider
+            >
+                <Typography 
+                align='center' 
+                color='primary' 
+                inline
+                >
                     {props.name}
                 </Typography>
             </ListItem>
-            <Collapse
-                in={props.expanded === props.name}
-            >
+            <Collapse in={props.expanded === props.name}>
                 <List component='nav' disablePadding>
-                    {
-                        renderItems()
-                    }
+                    {renderItems()}
                 </List>
             </Collapse>
         </>
