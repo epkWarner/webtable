@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-// import { Dialog } from '@material-ui/core'
 import Template1 from '../../../constants/DefaultTemplate';
 import NCSection from './subs/NCSection';
 import { Grid, LinearProgress } from '@material-ui/core';
@@ -8,16 +7,17 @@ export default function NewCharacter(props) {
 
     const [loading, setLoading] = useState(true)
     const [formState, setFormState] = useState({})
-    let Template = props.template ? 
-                    Object.keys(props.template.sections).length > 0 ?
-                        props.template 
-                            : Template1 
-                                : Template1
+
+    let Template = props.template ?
+        Object.keys(props.template.sections).length > 0 ?
+            props.template
+            : Template1
+        : Template1
 
     useEffect(() => {
         document.title = 'New Character'
         setFormState({})
-        
+
         let sections = {}
         Object.keys(Template.sections).map(
             section => {
@@ -26,15 +26,15 @@ export default function NewCharacter(props) {
                     field => {
                         return (
                             fields = {
-                                 ...fields,
-                                  [Template.sections[section].fields[field].meta.label]: Template.sections[section].fields[field].defaultValue 
-                                  || null
-                        }
+                                ...fields,
+                                [Template.sections[section].fields[field].meta.label]: Template.sections[section].fields[field].defaultValue
+                                    || null
+                            }
                         )
-            }
-            )
-            return sections = { ...sections, [section]: fields }
-        })
+                    }
+                )
+                return sections = { ...sections, [section]: fields }
+            })
 
         setFormState({ ...formState, ...sections })
         setLoading(false)
@@ -44,6 +44,7 @@ export default function NewCharacter(props) {
         };
 
     }, [Template])
+
 
     const handleChange = (e) => {
         let [section, name] = e.target.name.split('#')
@@ -68,17 +69,17 @@ export default function NewCharacter(props) {
                                 {
                                     Object.keys(Template.sections).map(
                                         section => {
-                                        return (
-                                            <Grid item xs={12} key={section}>
-                                                <NCSection
-                                                    title={section}
-                                                    state={formState}
-                                                    change={handleChange}
-                                                    section={Template.sections[section]}
-                                                />
-                                            </Grid>
-                                        )
-                                    }
+                                            return (
+                                                <Grid item xs={12} key={section}>
+                                                    <NCSection
+                                                        title={section}
+                                                        state={formState}
+                                                        change={handleChange}
+                                                        section={Template.sections[section]}
+                                                    />
+                                                </Grid>
+                                            )
+                                        }
                                     )
                                 }
                             </Grid>

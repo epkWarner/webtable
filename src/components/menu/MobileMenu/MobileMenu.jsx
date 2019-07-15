@@ -11,8 +11,9 @@ const styles = {
         position: 'fixed',
         bottom: '40vh',
         right: '5vw',
-        backgroundColor: '#13a506',
-        color: '#ffffff'
+        backgroundColor: '#ffffff',
+        backgroundOpacity: 0,
+        color: 'black'
     },
     open: {
         position: 'fixed',
@@ -30,30 +31,30 @@ function MobileMenu(props) {
     const [expanded, setExpanded] = useState('')
     const auth = useContext(Auth)
 
-    function toggleDrawer () {
+    function toggleDrawer() {
         setOpen(!open)
     }
 
     function toggler(name) {
-        expanded === name ? 
-        setExpanded('') 
-        : setExpanded(name)
+        expanded === name ?
+            setExpanded('')
+            : setExpanded(name)
     }
 
     return (
         <>
             <Fab
                 style={
-                    open ? 
-                    styles.open 
-                    : styles.closed
+                    open ?
+                        styles.open
+                        : styles.closed
                 }
                 onClick={toggleDrawer}
             >
                 {
                     !open ?
-                    <Add /> 
-                    : <Close />
+                        <Add />
+                        : <Close />
                 }
             </Fab>
             <SwipeableDrawer
@@ -65,24 +66,24 @@ function MobileMenu(props) {
                 {
                     Object.keys(menuItems).map(
                         key =>
-                        !menuItems[key].protected ?
-                            <MenuSection
-                                items={menuItems[key].collapse}
-                                key={key}
-                                name={key}
-                                toggle={toggler}
-                                expanded={expanded}
-                                toggleMenu={toggleDrawer}
-                            /> 
-                            : auth.authState ?
+                            !menuItems[key].protected ?
                                 <MenuSection
-                                    key={key}
                                     items={menuItems[key].collapse}
-                                    name={key} toggle={toggler}
+                                    key={key}
+                                    name={key}
+                                    toggle={toggler}
                                     expanded={expanded}
                                     toggleMenu={toggleDrawer}
-                                /> 
-                                : <></>
+                                />
+                                : auth.authState ?
+                                    <MenuSection
+                                        key={key}
+                                        items={menuItems[key].collapse}
+                                        name={key} toggle={toggler}
+                                        expanded={expanded}
+                                        toggleMenu={toggleDrawer}
+                                    />
+                                    : <></>
                     )
                 }
             </SwipeableDrawer>
